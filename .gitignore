@@ -1,0 +1,60 @@
+# ===============================
+# Python
+# ===============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Environment Variables
+.env
+
+# Python Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer Logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit Test / Coverage
+.coverage
+.coverage.*
+.pytest_cache/
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# SQLite Database
+*.db
+*.sqlite3
+instance/
+
+# Flask
+flask_session/
+
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Temporary Files
+*.tmp
+*.swp
