@@ -466,6 +466,22 @@ def init_db():
 def index():
     return render_template('index.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+        print(f"Contact form submission: {name} <{email}> - {subject}: {message}")
+        flash('Thank you for contacting us! We will get back to you shortly.', 'success')
+        return redirect(url_for('contact'))
+    return render_template('contact.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

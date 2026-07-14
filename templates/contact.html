@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us — EventOps AI{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <!-- Left Column: Contact Information -->
+            <div class="col-lg-5 text-lg-start text-center">
+                <div class="tag-label">
+                    <span class="tag-line"></span>Get In Touch
+                </div>
+                <h1 class="about-title mb-4">
+                    How Can We <span>Help You?</span>
+                </h1>
+                <p class="about-desc mb-4">
+                    Have questions about our event management platform or need technical assistance? Our dedicated support team is here to help you automate and optimize your event operations.
+                </p>
+
+                <div class="contact-info-list text-start">
+                    <!-- Address Info -->
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="contact-info-content">
+                            <h6>Our Headquarters</h6>
+                            <p>100 Innovation Way, Suite 400, Silicon Valley, CA</p>
+                        </div>
+                    </div>
+                    <!-- Email Info -->
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div class="contact-info-content">
+                            <h6>Email Address</h6>
+                            <p>support@eventops.ai</p>
+                        </div>
+                    </div>
+                    <!-- Phone Info -->
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div class="contact-info-content">
+                            <h6>Phone Number</h6>
+                            <p>+1 (555) 019-2834</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Contact Form -->
+            <div class="col-lg-7">
+                <div class="card contact-form-card p-4 p-md-5">
+                    <h3 class="fw-bold mb-4">Send Us a Message</h3>
+                    <form method="POST" action="{{ url_for('contact') }}" class="needs-validation" novalidate>
+                        <!-- Name input -->
+                        <div class="form-group-custom">
+                            <label for="contact-name">Full Name</label>
+                            <input type="text" class="form-control form-control-custom" id="contact-name" name="name" placeholder="John Doe" required>
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-group-custom">
+                            <label for="contact-email">Email Address</label>
+                            <input type="email" class="form-control form-control-custom" id="contact-email" name="email" placeholder="john@example.com" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+
+                        <!-- Subject input -->
+                        <div class="form-group-custom">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" class="form-control form-control-custom" id="contact-subject" name="subject" placeholder="How can we help?" required>
+                            <div class="invalid-feedback">Please enter a subject.</div>
+                        </div>
+
+                        <!-- Message input -->
+                        <div class="form-group-custom">
+                            <label for="contact-message">Message</label>
+                            <textarea class="form-control form-control-custom" id="contact-message" name="message" rows="5" placeholder="Tell us more about your request..." required></textarea>
+                            <div class="invalid-feedback">Please enter your message.</div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-contact-submit mt-2 py-3">
+                            <i class="bi bi-send-fill me-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Front-end Form Validation -->
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+{% endblock %}

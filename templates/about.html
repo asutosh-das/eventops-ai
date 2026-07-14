@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}About Us — EventOps AI{% endblock %}
+
+{% block content %}
+<section class="about-section">
+    <div class="container">
+        <!-- Main Top Row -->
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 text-lg-start text-center">
+                <div class="tag-label">
+                    <span class="tag-line"></span>About Us
+                </div>
+                <h1 class="about-title">
+                    Simplifying Events.<br>
+                    Empowering <span>People.</span>
+                </h1>
+                <p class="about-desc">
+                    EventOps AI is an intelligent event management platform that helps organizations plan, manage, and execute events seamlessly with the power of AI automation and real-time insights.
+                </p>
+                <div class="mt-4 d-flex gap-3 justify-content-lg-start justify-content-center">
+                    <a href="{{ url_for('register') }}" class="btn btn-get-started px-4 py-2.5">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="about-illustration-container">
+                    <img src="{{ url_for('static', filename='img/about_illustration.png') }}" alt="EventOps AI robot assistant and calendar illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <!-- Pillars Grid (4 Columns) -->
+        <div class="row about-pillars g-4 text-center">
+            <!-- Col 1: Our Mission -->
+            <div class="col-lg-3 col-md-6 pillar-col">
+                <div class="pillar-icon-wrapper">
+                    <i class="bi bi-bullseye"></i>
+                </div>
+                <h5 class="pillar-title">Our Mission</h5>
+                <p class="pillar-text">
+                    To simplify event management through AI-driven automation that saves time and improves efficiency.
+                </p>
+            </div>
+            <!-- Col 2: Our Vision -->
+            <div class="col-lg-3 col-md-6 pillar-col">
+                <div class="pillar-icon-wrapper">
+                    <i class="bi bi-eye"></i>
+                </div>
+                <h5 class="pillar-title">Our Vision</h5>
+                <p class="pillar-text">
+                    To become the most trusted AI-powered event management platform for organizations worldwide.
+                </p>
+            </div>
+            <!-- Col 3: What We Do -->
+            <div class="col-lg-3 col-md-6 pillar-col">
+                <div class="pillar-icon-wrapper">
+                    <i class="bi bi-lightning-charge"></i>
+                </div>
+                <h5 class="pillar-title">What We Do</h5>
+                <p class="pillar-text">
+                    We automate planning, registration, coordination, and monitoring—so you can focus on creating experiences.
+                </p>
+            </div>
+            <!-- Col 4: Why It Matters -->
+            <div class="col-lg-3 col-md-6 pillar-col">
+                <div class="pillar-icon-wrapper">
+                    <i class="bi bi-heart"></i>
+                </div>
+                <h5 class="pillar-title">Why It Matters</h5>
+                <p class="pillar-text">
+                    Better events bring people together. We use AI to handle the complexity behind the scenes.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
