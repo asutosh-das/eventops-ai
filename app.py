@@ -17,7 +17,15 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///eventops.db')
+
+# Use an absolute path for the SQLite DB so it works regardless of the CWD.
+_db_url = os.environ.get('DATABASE_URL', '')
+if not _db_url or _db_url.startswith('sqlite:///'):
+    _instance_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'instance')
+    os.makedirs(_instance_path, exist_ok=True)
+    _db_path = os.path.join(_instance_path, 'eventops.db')
+    _db_url = f'sqlite:///{_db_path}'
+app.config['SQLALCHEMY_DATABASE_URI'] = _db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
@@ -378,11 +386,7 @@ def process_reminders():
                 reminder.sent = True
         db.session.commit()
 
-# Start background scheduler
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=process_reminders, trigger="interval", seconds=60)
-scheduler.start()
-atexit.register(lambda: scheduler.shutdown())
+# Scheduler is started after db.create_all() in the main block below.
 
 # ------------------ Helper: Mock Data Generation ------------------
 def init_db():
@@ -473,12 +477,7 @@ def about():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        subject = request.form.get('subject')
-        message = request.form.get('message')
-        print(f"Contact form submission: {name} <{email}> - {subject}: {message}")
-        flash('Thank you for contacting us! We will get back to you shortly.', 'success')
+        flash('Thank you for your message! We will get back to you soon.', 'success')
         return redirect(url_for('contact'))
     return render_template('contact.html')
 
@@ -1040,6 +1039,12 @@ def admin_notification_send():
 with app.app_context():
     db.create_all()
     init_db()
+
+# Start background scheduler after DB is ready
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=process_reminders, trigger="interval", seconds=60)
+scheduler.start()
+atexit.register(lambda: scheduler.shutdown())
 
 if __name__ == '__main__':
     app.run(debug=True)
